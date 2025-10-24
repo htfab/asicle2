@@ -1,0 +1,39 @@
+set_io -nowarn clk_12mhz 35
+set_frequency clk_12mhz 12
+
+set_io -nowarn btn_sw2   10   # active low
+
+set_io -nowarn led_blue  39   # active low
+set_io -nowarn led_green 40   # active low
+set_io -nowarn led_red   41   # active low
+
+set_io -nowarn uart_tx   25
+set_io -nowarn uart_rx   27
+
+set_io -nowarn pmod0[0]   4   # ice only, near usb
+set_io -nowarn pmod0[1]   2
+set_io -nowarn pmod0[2]  47
+set_io -nowarn pmod0[3]  45
+set_io -nowarn pmod0[4]   3
+set_io -nowarn pmod0[5]  48
+set_io -nowarn pmod0[6]  46
+set_io -nowarn pmod0[7]  44
+
+set_io -nowarn pmod1[0]  43   # ice only, near led
+set_io -nowarn pmod1[1]  38
+set_io -nowarn pmod1[2]  34
+set_io -nowarn pmod1[3]  31
+set_io -nowarn pmod1[4]  42
+set_io -nowarn pmod1[5]  36
+set_io -nowarn pmod1[6]  32
+set_io -nowarn pmod1[7]  28
+
+set_io -nowarn pmod2[0]  25   # shared with rp2040
+set_io -nowarn pmod2[1]  19
+set_io -nowarn pmod2[2]  27
+set_io -nowarn pmod2[3]  21
+set_io -nowarn pmod2[4]  23
+set_io -nowarn pmod2[5]  18
+set_io -nowarn pmod2[6]  26
+set_io -nowarn pmod2[7]  20
+

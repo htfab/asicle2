@@ -1,0 +1,42 @@
+{
+    "default_part": "XC7A35TCPG236-1",
+    "values": {
+        "top": "fpga_top",
+        "read_verilog_args": ["-sv"]
+    },
+    "dependencies": {
+        "sources": [
+            "../../src/input_gamepad.sv",
+            "../../src/input_debounce.sv",
+            "../../src/input_logic.sv",
+            "../../src/input_top.sv",
+            "../../src/vga_grid.sv",
+            "../../src/vga_render.sv",
+            "../../src/vga_top.sv",
+            "../../src/qspi_arbiter.sv",
+            "../../src/qspi_sequencer.sv",
+            "../../src/qspi_sampler.sv",
+            "../../src/qspi_fifo.sv",
+            "../../src/qspi_top.sv",
+            "../../src/game_board.sv",
+            "../../src/game_feedback.sv",
+            "../../src/game_logic.sv",
+            "../../src/game_top.sv",
+            "../../src/project.sv",
+            "pll.sv",
+            "delay.sv",
+            "fpga_top.sv"
+        ],
+        "synth_log": "synth.log",
+        "pack_log": "pack.log"
+    },
+    "XC7A35TCPG236-1": {
+        "default_target": "bitstream",
+        "dependencies": {
+            "build_dir": "build/basys3",
+            "xdc": [
+                "basys3.xdc"
+            ]
+        }
+    }
+}
