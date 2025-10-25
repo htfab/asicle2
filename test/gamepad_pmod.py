@@ -39,10 +39,15 @@ button_states = {
     "roll":    "111111111111011000000000",  # select + Y
 }
 
-async def send_gamepad_input(dut, button, verbose=False):
+async def send_gamepad_input(dut, button, release=True, release_time_us=8000, verbose=False):
     if verbose:
         dut._log.info(f"Setting gamepad input: {button}")
     await send_gamepad_state(dut, button_states[button])
+    if release:
+        await Timer(release_time_us, unit="us")
+        if verbose:
+            dut._log.info(f"Setting gamepad input: none")
+        await send_gamepad_state(dut, button_states["none"])
 
 direct_states = {
     "none":   0b00000000,
@@ -56,8 +61,13 @@ direct_states = {
     "roll":   0b10000000,
 }
 
-async def send_direct_input(dut, button, verbose):
+async def send_direct_input(dut, button, release=True, release_time_us=8000, verbose=False):
     if verbose:
         dut._log.info(f"Setting direct input: {button}")
     dut.ui_in.value = direct_states[button]
+    if release:
+        await Timer(release_time_us, unit="us")
+        if verbose:
+            dut._log.info(f"Setting direct input: none")
+        dut.ui_in.value = direct_states["none"]
 

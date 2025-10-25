@@ -78,10 +78,6 @@ always @(posedge clk) begin
         new_game <= 0;
         letter_available <= 0;
         {ack_up, ack_down, ack_left, ack_right, ack_guess, ack_soft_new, ack_hard_new, ack_peek, ack_roll, ack_any} <= 0;
-        if (btn_any) begin
-            ack_any <= 1;
-            invalid_feedback <= 0;
-        end
         if (row <= 6) begin
             // keep the right letter selected for font rendering
             word_index <= (peek_mode && row == 6) ? 3'd0 : 3'(row);
@@ -100,6 +96,10 @@ always @(posedge clk) begin
             letter_index <= current_column-1;
             if (word_index == current_row && letter_index == current_column-1) begin
                 letter_available <= 1;
+                if (btn_any) begin
+                    ack_any <= 1;
+                    invalid_feedback <= 0;
+                end
                 if (btn_soft_new || btn_hard_new) begin
                     ack_soft_new <= btn_soft_new;
                     ack_hard_new <= btn_hard_new;

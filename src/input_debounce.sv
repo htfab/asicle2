@@ -10,7 +10,7 @@ module input_debounce (
     output reg [`INPUTS-1:0] just_released
 );
 
-reg [16:0] counter;
+reg [15:0] counter;
 reg [`INPUTS-1:0] pending_changes;
 
 wire [`INPUTS-1:0] next_pending_changes = pending_changes & (held_down ^ inputs);

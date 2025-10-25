@@ -28,31 +28,25 @@ async def test_project(dut):
         ["down"] *  1 + ["right"] +
         ["up"]   *  7 + ["right"] +
         ["down"] *  5 + ["guess"] +
-        # MANIA
-        ["down"] * 13 + ["right"] +
+        # ANGLE
         ["down"] *  1 + ["right"] +
         ["up"]   * 13 + ["right"] +
-        ["down"] *  9 + ["right"] +
-        ["down"] *  1 + ["guess"] +
-        # AVOID
+        ["down"] *  7 + ["right"] +
+        ["down"] * 12 + ["right"] +
+        ["down"] *  1 + ["guess"] +  # try invalid word ANGLA
+        ["down"] *  4 + ["guess"] +  # then fix it
+        # ALONE
         ["down"] *  1 + ["right"] +
-        ["up"]   *  5 + ["right"] +
+        ["down"] * 12 + ["right"] +
         ["up"]   * 12 + ["right"] +
-        ["down"] *  9 + ["right"] +
-        ["down"] *  2 + ["guess"] +  # try invalid word AVOIB
-        ["down"] *  2 + ["guess"] +  # then fix it
-        # AUDIO
-        ["down"] *  1 + ["right"] +
-        ["up"]   *  6 + ["right"] +
-        ["down"] *  4 + ["right"] +
-        ["down"] *  9 + ["right"] +
-        ["up"]   * 12 + ["guess"] +
+        ["up"]   * 13 + ["right"] +
+        ["down"] *  5 + ["guess"] +
         # testing debug features & no entry after game over
         ["peek"] +
         ["roll"] +
         ["down"] * 5 +
         ["new"] +
-        ["down"] * 3
+        ["down"] * 5
     )
 
     # Set clock period to 40 ns (25 MHz)
@@ -69,7 +63,7 @@ async def test_project(dut):
     V_BACK    =  33
 
     # Number of frames to capture
-    CAPTURE_FRAMES = len(GAMEPAD_INPUT) * 2 + 1
+    CAPTURE_FRAMES = len(GAMEPAD_INPUT) + 1
 
     # Derived constants
     H_SYNC_START = H_DISPLAY + H_FRONT
@@ -163,19 +157,13 @@ async def test_project(dut):
     for i in range(CAPTURE_FRAMES):
         frame = await capture_frame(i)
         frame.save(f"output/frame{i:03}.png")
-        if i < 2 * len(GAMEPAD_INPUT):
-            button = GAMEPAD_INPUT[i//2]
-            use_gamepad_pmod = ((i//2) % 4 == 0) and button not in ("new", "peek", "roll")
+        if i < len(GAMEPAD_INPUT):
+            button = GAMEPAD_INPUT[i]
+            use_gamepad_pmod = (i % 2 == 0) and button not in ("new", "peek", "roll")
             if use_gamepad_pmod:
-                if i % 2 == 0:
-                    cocotb.start_soon(send_gamepad_input(dut, button, VERBOSE))
-                else:
-                    cocotb.start_soon(send_gamepad_input(dut, "none", VERBOSE))
+                cocotb.start_soon(send_gamepad_input(dut, button, verbose=VERBOSE))
             else:
-                if i % 2 == 0:
-                    cocotb.start_soon(send_direct_input(dut, button, VERBOSE))
-                else:
-                    cocotb.start_soon(send_direct_input(dut, "none", VERBOSE))
+                cocotb.start_soon(send_direct_input(dut, button, verbose=VERBOSE))
 
 
 @cocotb.test()
