@@ -15,6 +15,7 @@ module game_board (
     output wire [24:0] self_match_matrix
 );
 
+(* mem2reg *)
 reg [4:0] board [6:0][4:0];  // word 0 is the solution
 
 // pipelining to improve crtitical timing path
