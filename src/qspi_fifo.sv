@@ -12,7 +12,7 @@ module qspi_fifo (
     output reg [1:0] pop_data,
     output wire empty,
     output wire full,
-    output wire [6:0] count,
+    output wire [4:0] count,
     output wire [31:0] buffer
 );
 

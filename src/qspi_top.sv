@@ -32,7 +32,7 @@ wire stop_read;
 wire adjust;
 wire fifo_empty;
 wire fifo_full;
-wire [6:0] fifo_count;
+wire [4:0] fifo_count;
 wire fifo_clear;
 wire fifo_pop;
 

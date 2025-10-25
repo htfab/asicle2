@@ -17,7 +17,7 @@ module qspi_arbiter (
     output wire        fifo_pop,
     input  wire        fifo_empty,
     input  wire        fifo_full,
-    input  wire  [6:0] fifo_count,
+    input  wire  [4:0] fifo_count,
     // from game logic
     input  wire  [4:0] letter,
     input  wire [23:0] fetch_addr,
