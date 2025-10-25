@@ -88,8 +88,10 @@ async def test_project(dut):
         palette[b0<<6|g0<<5|r0<<4|b1<<2|g1<<1|r1<<0] = bytes((red, green, blue))
 
     # Set up the clock
-    clock = Clock(dut.clk, CLOCK_PERIOD, unit="ns")
-    cocotb.start_soon(clock.start())
+    # => this was moved to the Verilog testbench tb.v
+    #    for massive memory usage & speed improvements
+    #clock = Clock(dut.clk, CLOCK_PERIOD, unit="ns")
+    #cocotb.start_soon(clock.start())
 
     # Attach the simulated QSPI Pmod
     cocotb.start_soon(qspi_pmod(dut, QSPI_FLASH_BIN, VERBOSE))
