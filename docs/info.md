@@ -1,5 +1,7 @@
 ## How it works
 
+![VGA screenshot with questions CRATE and ANGLE](frame089.png)
+
 Asicle is a Wordle clone implemented directly in hardware. A [first version](https://github.com/htfab/asicle)
 of it was taped out on the Google-Skywater MPW6 shuttle. This second version is a rewrite for Tiny Tapeout.
 
